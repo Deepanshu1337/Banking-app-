@@ -2,6 +2,7 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 0 2rem;
+    align-items: center;
 }
 
 .welcome {
@@ -35,6 +36,26 @@ nav {
     outline: none;
     border: 1px solid #ccc;
 }
+.logout__input {
+    border: none;
+    padding: 0.5rem 2rem;
+    font-size: 1.6rem;
+    font-family: inherit;
+    text-align: center;
+    width: 12rem;
+    border-radius: 10rem;
+    margin-right: 1rem;
+    color: inherit;
+    border: 1px solid #fff;
+    transition: all 0.3s;
+}
+
+.logout__input:focus,.logout__input:hover {
+    outline: none;
+    background-color: #33333311;
+    cursor: pointer;
+}
+
 .login__btn{
     border:none;
     background:none;
@@ -59,7 +80,7 @@ nav {
     grid-template-rows: auto repeat(3,15rem) auto;
     gap: 2rem;
 
-    opacity: 1;
+    opacity: 0;
     transition: all 1s;
 }
 
@@ -232,6 +253,11 @@ h2{
 }
 .timer{
     font-weight: 600;
+}
+/* hide and showing classes */
+
+.hide{
+    display: none;
 }
 
 

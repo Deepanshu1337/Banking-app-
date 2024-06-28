@@ -20,11 +20,12 @@
     <nav>
         <p class="welcome">Log in to get started</p>
         <h1 class="brand">My Bank</h1>
-        <form class="login">
+        <form class="login" id="login_btns">
             <input type="text" class="login__input login__input--user" placeholder="User">
             <input type="password" class="login__input login__input--pin" placeholder="PIN">
             <button class="login__btn">&rarr;</button>
         </form>
+        <button class="logout__input btn--logout hide " id="logout_btn" >Log out</button>
     </nav>
 
     <main class="app">
@@ -33,7 +34,7 @@
             <div>
                 <p class="balance__label">Current Balance</p>
                 <p class="balance__date">
-                    As of <span>05/03/2028</span>
+                    As of <span class="date">05/03/2028</span>
                 </p>
             </div>
             <p class="balance__value">0000$</p>
