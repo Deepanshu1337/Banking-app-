@@ -321,31 +321,24 @@ btnLoan.addEventListener('click', function (e) {
 //close account 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
-
   function closeAccount() {
-    
-  if (
-    inputCloseUsername.value === currentAcc.userName &&
-    +inputClosePin.value === currentAcc.pin
-  ) {
-    const index = accounts.findIndex(
-      acc => acc.userName === currentAcc.userName
-    );
-    app.style.opacity = 0;
-    accounts.splice(index, 1);
-    lebelWelcome.innerText = 'Log in to get started';
-  }
-  inputCloseUsername.value = inputClosePin.value = '';
+    if (
+      inputCloseUsername.value === currentAcc.userName &&
+      +inputClosePin.value === currentAcc.pin
+    ) {
+      const index = accounts.findIndex(
+        acc => acc.userName === currentAcc.userName
+      );
+      app.style.opacity = 0;
+      loginBtns.classList.toggle('hide');
+      logOutBtn.classList.toggle('hide');
+      accounts.splice(index, 1);
+      lebelWelcome.innerText = 'Log in to get started';
+    }
+    inputCloseUsername.value = inputClosePin.value = '';
   }
   
-  setTimeout(
-    function () {
-      closeAccount();
-       loginBtns.classList.toggle('hide');
-       logOutBtn.classList.toggle('hide');
-    }
-  , 2000);
+  setTimeout(closeAccount, 2000);
+
 });
-
-
 
