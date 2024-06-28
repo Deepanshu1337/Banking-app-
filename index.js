@@ -337,9 +337,15 @@ btnClose.addEventListener('click', function (e) {
   }
   inputCloseUsername.value = inputClosePin.value = '';
   }
-   loginBtns.classList.toggle('hide');
-   logOutBtn.classList.toggle('hide');
+  
   setTimeout(closeAccount, 2000);
+  setTimeout(
+    function () {
+      closeAccount();
+       loginBtns.classList.toggle('hide');
+       logOutBtn.classList.toggle('hide');
+    }
+  , 2000);
 });
 
 
