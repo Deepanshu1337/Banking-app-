@@ -338,7 +338,6 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
   }
   
-  setTimeout(closeAccount, 2000);
   setTimeout(
     function () {
       closeAccount();
