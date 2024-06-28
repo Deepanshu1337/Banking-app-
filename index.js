@@ -235,7 +235,7 @@ labelDate.textContent = formatDate(dateNow,currentAcc.locale)
     lebelWelcome.innerText = `Welcome back, ${currentAcc.owner.split(' ')[0]}😊`;
     logOut = false;
     startLogoutTimer();
-    console.log(loginBtns.classList)
+
     loginBtns.classList.toggle("hide");
     logOutBtn.classList.toggle("hide");
     updatUi(currentAcc);
@@ -337,6 +337,8 @@ btnClose.addEventListener('click', function (e) {
   }
   inputCloseUsername.value = inputClosePin.value = '';
   }
+   loginBtns.classList.toggle('hide');
+   logOutBtn.classList.toggle('hide');
   setTimeout(closeAccount, 2000);
 });
 
