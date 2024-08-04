@@ -3,6 +3,7 @@ nav {
     justify-content: space-between;
     padding: 0 2rem;
     align-items: center;
+    background-color: #ddd;
 }
 
 .welcome {

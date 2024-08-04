@@ -48,9 +48,9 @@ const accounts = [account1, account2];
 
 // ----------------------------------------------------------------------Elements selectors------------------------------------------------------------------------
 const app = document.querySelector('.app');
-const lebelWelcome = document.querySelector('.welcome');
+const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
-const lebelBalance = document.querySelector('.balance__value');
+const labelBalance = document.querySelector('.balance__value');
 const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumInterest = document.querySelector('.summary__value--interest');
@@ -77,7 +77,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 //---------------------------------------------------------------------------- UPDATING UI ---------------------------------------------------------------------------------
 
-const updatUi = function (acc) {
+const updateUi = function (acc) {
   displayTransactions(acc);
   calDisplayBalance(acc);
   calDisplaySummary(acc);
@@ -95,6 +95,8 @@ const createUserName = function (accounts) {
   });
 };
 window.onload = createUserName(accounts);
+const usernames = createUserName(accounts);
+console.log(usernames)
 //-----------------------------------------------------------------------FORMATTING FUNCTIONS FOR CURRENCY AND DATE ACCORDING TO LOCALE OF USER---------------------------
 
 const formatCurrency = function (value, locale, currency) {
@@ -164,7 +166,7 @@ const displayTransactions = function (acc) {
 
 const calDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  lebelBalance.textContent = formatCurrency(acc.balance.toFixed(2), acc.locale, acc.currency);
+  labelBalance.textContent = formatCurrency(acc.balance.toFixed(2), acc.locale, acc.currency);
 };
 
 // -------------------------------------------------------------------------DISPLAY SUMMARY------------------------------------------------------------------------------
@@ -207,14 +209,14 @@ const startLogoutTimer = function () {
   tick();
   const timer = setInterval(tick, 1000);
 }
-//------------------------------------------------------------------------LOGIN IMPLIMENTATION-----------------------------------------------------------------------------
+//------------------------------------------------------------------------LOGIN IMPLEMENTATION-----------------------------------------------------------------------------
 
 let currentAcc;
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
   currentAcc = accounts.find(acc => acc.userName === inputLoginUsername.value);
 
-  //date implimentation
+  //date implementation
   const dateNow = new Date();
   // const year = dateNow.getFullYear();
   // const month = `${dateNow.getMonth() + 1}`.padStart(2, '0');
@@ -232,13 +234,13 @@ labelDate.textContent = formatDate(dateNow,currentAcc.locale)
      inputLoginUsername.disabled = inputLoginPin.disabled = true;
     app.style.opacity = 1;
 
-    lebelWelcome.innerText = `Welcome back, ${currentAcc.owner.split(' ')[0]}😊`;
+    labelWelcome.innerText = `Welcome back, ${currentAcc.owner.split(' ')[0]}😊`;
     logOut = false;
     startLogoutTimer();
 
     loginBtns.classList.toggle("hide");
     logOutBtn.classList.toggle("hide");
-    updatUi(currentAcc);
+    updateUi(currentAcc);
   }
 });
 
@@ -257,8 +259,8 @@ const logout = function () {
   app.style.opacity = 0;
   currentAcc = null;
   inputLoginUsername.disabled = inputLoginPin.disabled = false;
-  lebelWelcome.innerText = 'Log in to get started';
-  lebelBalance.textContent = '';
+  labelWelcome.innerText = 'Log in to get started';
+  labelBalance.textContent = '';
   labelSumIn.textContent = '';
   labelSumOut.textContent = '';
   labelSumInterest.textContent = '';
@@ -275,22 +277,22 @@ btnTransfer.addEventListener('click', function (e) {
 
   function transferMoney() {
     const amount = +inputTransferAmount.value;
-    const recieverAcc = accounts.find(
+    const receiverAcc = accounts.find(
       acc => acc.userName === inputTransferTo.value
     );
 
     if (
       amount > 0 &&
       amount <= currentAcc.balance &&
-      recieverAcc &&
-      currentAcc.userName !== recieverAcc.userName
+      receiverAcc &&
+      currentAcc.userName !== receiverAcc.userName
     ) {
       inputTransferAmount.value = inputTransferTo.value = '';
       currentAcc.movements.push(-amount);
-      recieverAcc.movements.push(amount);
+      receiverAcc.movements.push(amount);
       currentAcc.movementsDates.push(new Date().toISOString());
-      recieverAcc.movementsDates.push(new Date().toISOString());
-      updatUi(currentAcc);
+      receiverAcc.movementsDates.push(new Date().toISOString());
+      updateUi(currentAcc);
     }
   }
   setTimeout(transferMoney, 1000);
@@ -307,7 +309,7 @@ btnLoan.addEventListener('click', function (e) {
     ) {
       currentAcc.movements.push(+inputLoanAmount.value);
       currentAcc.movementsDates.push(`${new Date().toISOString()}`);
-      updatUi(currentAcc);
+      updateUi(currentAcc);
 
       inputLoanAmount.value = '';
     } else {
@@ -333,7 +335,7 @@ btnClose.addEventListener('click', function (e) {
       loginBtns.classList.toggle('hide');
       logOutBtn.classList.toggle('hide');
       accounts.splice(index, 1);
-      lebelWelcome.innerText = 'Log in to get started';
+      labelWelcome.innerText = 'Log in to get started';
     }
     inputCloseUsername.value = inputClosePin.value = '';
   }
